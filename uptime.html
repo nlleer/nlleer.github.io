@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мониторинг аптайма</title>
+    <script src="https://cdn.jsdelivr.net/npm/mineflayer/dist/mineflayer.browser.js"></script>
+    <script>
+        function checkMinecraftServer() {
+            const bot = mineflayer.createBot({
+                host: 'play.mcrol.fun', // Замените на адрес вашего сервера Minecraft
+                port: 25565, // Порт сервера Minecraft (обычно 25565)
+                username: 'monitoring', // Имя бота для подключения к серверу
+            });
+
+            bot.once('login', () => {
+                document.getElementById("status").innerText = "Сервер Minecraft в сети";
+                bot.end(); // Закрываем соединение после успешного подключения
+            });
+
+            bot.once('error', (err) => {
+                document.getElementById("status").innerText = "Сервер Minecraft недоступен";
+            });
+        }
+
+        setInterval(checkMinecraftServer, 60000); // Проверять аптайм каждую 1 минуту
+    </script>
+</head>
+<body>
+    <h1>Мониторинг аптайма</h1>
+    <p>Статус сервера Minecraft: <span id="status">Проверка...</span></p>
+</body>
+</html>
