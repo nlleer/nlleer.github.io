@@ -3,27 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мониторинг аптайма</title>
+    <title>Мониторинг аптайма серверов Minecraft</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'Monocraft';
+            src: url('Monocraft.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: white;
+            font-family: 'Monocraft', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .content {
+            text-align: center;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .server-status {
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #1f1f1f;
+            box-shadow: 0 0 9px #666;
+        }
+
+        .server-status h2 {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .server-status p {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+
+        .button {
+            background-color: #000000;
+            border-radius: 30px;
+            border: 1px solid white;
+            color: white;
+            padding: 10px 30px;
+            font-size: 30px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background-color: #3d3d3d;
+        }
+
+        h1 {
+            font-size: 32px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        .button .fa-telegram {
+            margin-right: 10px;
+        }
+    </style>
     <script>
-        async function checkMinecraftServer() {
-            const serverIp = 'play.mcrol.fun'; // Замените на адрес вашего сервера Minecraft
-            const serverPort = 25565; // Порт сервера Minecraft (обычно 25565)
+        async function checkMinecraftServers() {
+            const servers = [
+                { ip: 'play.mcrol.fun', port: 25565 },
+                { ip: 'server2.example.com', port: 25565 },
+                { ip: 'server3.example.com', port: 25565 },
+                { ip: 'server4.example.com', port: 25565 },
+                { ip: 'server5.example.com', port: 25565 }
+            ];
 
-            const response = await fetch(`https://api.mcsrvstat.us/2/${serverIp}:${serverPort}`);
-            const data = await response.json();
+            for (const server of servers) {
+                const response = await fetch(`https://api.mcsrvstat.us/2/${server.ip}:${server.port}`);
+                const data = await response.json();
 
-            if (data.online) {
-                document.getElementById("status").innerText = "Сервер Minecraft в сети";
-            } else {
-                document.getElementById("status").innerText = "Сервер Minecraft недоступен";
+                const statusElement = document.getElementById(`status-${server.ip.replace(/\./g, '-')}`);
+                if (data.online) {
+                    statusElement.innerText = "Сервер в сети";
+                    statusElement.style.color = "green";
+                } else {
+                    statusElement.innerText = "Сервер недоступен";
+                    statusElement.style.color = "red";
+                }
             }
         }
 
-        setInterval(checkMinecraftServer, 3000); // Проверять аптайм каждые 5 секунд
+        setInterval(checkMinecraftServers, 5000); // Проверять аптайм каждые 5 секунд
     </script>
 </head>
 <body>
-    <h1>Мониторинг аптайма</h1>
-    <p>Статус сервера Minecraft: <span id="status">Проверка...</span></p>
+    <div class="content">
+        <h1>Мониторинг аптайма серверов Minecraft</h1>
+        <div class="server-status">
+            <h2>play.mcrol.fun</h2>
+            <p>Статус: <span id="status-play-mcrol-fun">Проверка...</span></p>
+        </div>
+        <div class="server-status">
+            <h2>server2.example.com</h2>
+            <p>Статус: <span id="status-server2-example-com">Проверка...</span></p>
+        </div>
+        <div class="server-status">
+            <h2>server3.example.com</h2>
+            <p>Статус: <span id="status-server3-example-com">Проверка...</span></p>
+        </div>
+        <div class="server-status">
+            <h2>server4.example.com</h2>
+            <p>Статус: <span id="status-server4-example-com">Проверка...</span></p>
+        </div>
+        <div class="server-status">
+            <h2>server5.example.com</h2>
+            <p>Статус: <span id="status-server5-example-com">Проверка...</span></p>
+        </div>
+    </div>
 </body>
 </html>
