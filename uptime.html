@@ -4,26 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мониторинг аптайма</title>
-    <script src="https://cdn.jsdelivr.net/npm/mineflayer/dist/mineflayer.browser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mcstatus/6.2.0/mcstatus.min.js"></script>
     <script>
         function checkMinecraftServer() {
-            const bot = mineflayer.createBot({
-                host: 'play.mcrol.fun', // Замените на адрес вашего сервера Minecraft
-                port: 25565, // Порт сервера Minecraft (обычно 25565)
-                username: 'monitoring', // Имя бота для подключения к серверу
-            });
+            const serverIp = 'play.mcrol.fun'; // Замените на адрес вашего сервера Minecraft
+            const serverPort = 25565; // Порт сервера Minecraft (обычно 25565)
 
-            bot.once('login', () => {
-                document.getElementById("status").innerText = "Сервер Minecraft в сети";
-                bot.end(); // Закрываем соединение после успешного подключения
-            });
+            mcstatus.init({cache: 500}); // Инициализация библиотеки
 
-            bot.once('error', (err) => {
-                document.getElementById("status").innerText = "Сервер Minecraft недоступен";
-            });
+            mcstatus.getStatus(serverIp, serverPort)
+                .then((response) => {
+                    if (response.online) {
+                        document.getElementById("status").innerText = "Сервер Minecraft в сети";
+                    } else {
+                        document.getElementById("status").innerText = "Сервер Minecraft недоступен";
+                    }
+                })
+                .catch((error) => {
+                    document.getElementById("status").innerText = "Ошибка при проверке статуса сервера";
+                });
         }
 
-        setInterval(checkMinecraftServer, 60000); // Проверять аптайм каждую 1 минуту
+        setInterval(checkMinecraftServer, 5000); // Проверять аптайм каждые 5 секунд
     </script>
 </head>
 <body>
