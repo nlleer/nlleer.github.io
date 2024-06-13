@@ -39,22 +39,16 @@
             border-radius: 10px;
             background-color: #1f1f1f;
             box-shadow: 0 0 9px #666;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
         }
 
         .server-status h2 {
             font-size: 24px;
             margin: 10px 0;
-            flex-grow: 1;
         }
 
         .server-status p {
             font-size: 18px;
             margin: 5px 0;
-            display: flex;
-            align-items: center;
         }
 
         .copy-button {
@@ -69,6 +63,12 @@
 
         .copy-button:hover {
             color: #3d3d3d;
+        }
+
+        .status-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         h1 {
@@ -120,23 +120,38 @@
         <h1>Мониторинг аптайма серверов Minecraft</h1>
         <div class="server-status">
             <h2>play.mcrol.fun</h2>
-            <p>Статус: <span id="status-play-mcrol-fun">Проверка...</span> <button class="copy-button" onclick="copyToClipboard('play.mcrol.fun')"><i class="fas fa-copy"></i></button></p>
+            <div class="status-container">
+                <p>Статус: <span id="status-play-mcrol-fun">Проверка...</span></p>
+                <button class="copy-button" onclick="copyToClipboard('play.mcrol.fun')"><i class="fas fa-copy"></i></button>
+            </div>
         </div>
         <div class="server-status">
             <h2>mc.kartoshka2331.guru</h2>
-            <p>Статус: <span id="status-mc-kartoshka2331-guru">Проверка...</span> <button class="copy-button" onclick="copyToClipboard('mc.kartoshka2331.guru')"><i class="fas fa-copy"></i></button></p>
+            <div class="status-container">
+                <p>Статус: <span id="status-mc-kartoshka2331-guru">Проверка...</span></p>
+                <button class="copy-button" onclick="copyToClipboard('mc.kartoshka2331.guru')"><i class="fas fa-copy"></i></button>
+            </div>
         </div>
         <div class="server-status">
             <h2>Server3</h2>
-            <p>Статус: <span id="status-server3">Проверка...</span> <button class="copy-button" onclick="copyToClipboard('Server3')"><i class="fas fa-copy"></i></button></p>
+            <div class="status-container">
+                <p>Статус: <span id="status-server3">Проверка...</span></p>
+                <button class="copy-button" onclick="copyToClipboard('Server3')"><i class="fas fa-copy"></i></button>
+            </div>
         </div>
         <div class="server-status">
             <h2>Server4</h2>
-            <p>Статус: <span id="status-server4">Проверка...</span> <button class="copy-button" onclick="copyToClipboard('Server4')"><i class="fas fa-copy"></i></button></p>
+            <div class="status-container">
+                <p>Статус: <span id="status-server4">Проверка...</span></p>
+                <button class="copy-button" onclick="copyToClipboard('Server4')"><i class="fas fa-copy"></i></button>
+            </div>
         </div>
         <div class="server-status">
             <h2>Server5</h2>
-            <p>Статус: <span id="status-server5">Проверка...</span> <button class="copy-button" onclick="copyToClipboard('Server5')"><i class="fas fa-copy"></i></button></p>
+            <div class="status-container">
+                <p>Статус: <span id="status-server5">Проверка...</span></p>
+                <button class="copy-button" onclick="copyToClipboard('Server5')"><i class="fas fa-copy"></i></button>
+            </div>
         </div>
     </div>
 </body>
