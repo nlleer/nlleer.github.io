@@ -39,11 +39,15 @@
             border-radius: 10px;
             background-color: #1f1f1f;
             box-shadow: 0 0 9px #666;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .server-status h2 {
             font-size: 24px;
             margin: 10px 0;
+            flex-grow: 1;
         }
 
         .server-status p {
@@ -51,22 +55,22 @@
             margin: 5px 0;
         }
 
-        .button {
+        .copy-button {
             background-color: #000000;
             border-radius: 30px;
             border: 1px solid white;
             color: white;
-            padding: 10px 30px;
-            font-size: 30px;
+            padding: 10px;
+            font-size: 14px;
             text-decoration: none;
             transition: background-color 0.3s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-top: 20px;
+            cursor: pointer;
         }
 
-        .button:hover {
+        .copy-button:hover {
             background-color: #3d3d3d;
         }
 
@@ -76,10 +80,6 @@
 
         p {
             font-size: 18px;
-        }
-
-        .button .fa-telegram {
-            margin-right: 10px;
         }
     </style>
     <script>
@@ -107,6 +107,14 @@
             }
         }
 
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert("IP скопирован: " + text);
+            }, function(err) {
+                console.error("Ошибка при копировании: ", err);
+            });
+        }
+
         setInterval(checkMinecraftServers, 2000);
     </script>
 </head>
@@ -116,22 +124,27 @@
         <div class="server-status">
             <h2>play.mcrol.fun</h2>
             <p>Статус: <span id="status-play-mcrol-fun">Проверка...</span></p>
+            <button class="copy-button" onclick="copyToClipboard('play.mcrol.fun')">Копировать IP</button>
         </div>
         <div class="server-status">
             <h2>mc.kartoshka2331.guru</h2>
             <p>Статус: <span id="status-mc-kartoshka2331-guru">Проверка...</span></p>
+            <button class="copy-button" onclick="copyToClipboard('mc.kartoshka2331.guru')">Копировать IP</button>
         </div>
         <div class="server-status">
-            <h2>Server not found</h2>
+            <h2>Server3</h2>
             <p>Статус: <span id="status-server3">Проверка...</span></p>
+            <button class="copy-button" onclick="copyToClipboard('Server3')">Копировать IP</button>
         </div>
         <div class="server-status">
-            <h2>Server not found</h2>
+            <h2>Server4</h2>
             <p>Статус: <span id="status-server4">Проверка...</span></p>
+            <button class="copy-button" onclick="copyToClipboard('Server4')">Копировать IP</button>
         </div>
         <div class="server-status">
-            <h2>Server not found</h2>
+            <h2>Server5</h2>
             <p>Статус: <span id="status-server5">Проверка...</span></p>
+            <button class="copy-button" onclick="copyToClipboard('Server5')">Копировать IP</button>
         </div>
     </div>
 </body>
