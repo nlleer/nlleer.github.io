@@ -168,7 +168,6 @@
                     }
         
                     ipElement.innerText = server.ip + ':' + server.port;
-                    copyButton.setAttribute('data-clipboard-text', server.ip + ':' + server.port);
                 } catch (error) {
                     console.error('Ошибка при получении данных сервера', error);
                 }
@@ -188,9 +187,12 @@
         }
         
         function copyToClipboard(buttonId) {
-            const textToCopy = document.getElementById(buttonId).getAttribute('data-clipboard-text');
-            navigator.clipboard.writeText(textToCopy).then(function() {
-                alert("IP скопирован: " + textToCopy);
+            // Находим IP-адрес сервера, который уже отображается на странице
+            const ipElement = document.getElementById(buttonId.replace('copy-', 'ip-'));
+            const ipToCopy = ipElement.innerText.trim();
+
+            navigator.clipboard.writeText(ipToCopy).then(function() {
+                alert("IP скопирован: " + ipToCopy);
             }, function(err) {
                 console.error("Ошибка при копировании: ", err);
             });
