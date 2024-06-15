@@ -176,13 +176,12 @@
                             motdElement.style.color = '#ddd';
                             motdElement.style.backgroundColor = '#333';
                         }
-                        playersElement.innerText = `Игроки: ${data.players.online}/${data.players.max}`;
                     } else {
                         statusElement.innerText = "Сервер недоступен";
                         statusElement.classList.remove('status-online');
                         statusElement.classList.add('status-offline');
                         motdElement.innerText = "";
-                        playersElement.innerText = "Игроки: --";
+                        playersElement.innerText = "Игроки: ${data.players.online}/${data.players.max}";
                     }
 
                     ipElement.innerText = server.ip + ':' + server.port;
