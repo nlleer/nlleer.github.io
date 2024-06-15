@@ -26,12 +26,24 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            position: relative;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
         }
 
         .content {
             text-align: center;
             width: 80%;
             max-width: 800px;
+            z-index: 1;
+            position: relative;
         }
 
         .server-status {
@@ -124,7 +136,7 @@
             <div class="server-info">
                 <p id="status-play-mcrol-fun">Проверка...</p>
                 <p id="ip-play-mcrol-fun">IP сервера: play.mcrol.fun</p>
-                <p id="players-play-mcrol-fun">Игроки: --</p> <!-- New line for player count -->
+                <p id="players-play-mcrol-fun">Игроки: --</p>
                 <div id="motd-play-mcrol-fun" class="motd"></div>
             </div>
             <button id="copy-play-mcrol-fun" class="copy-button" onclick="copyToClipboard('copy-play-mcrol-fun')"><i class="fas fa-copy"></i></button>
