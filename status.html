@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Статус серверов Minecraft</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         @font-face {
@@ -115,6 +116,7 @@
     </style>
 </head>
 <body>
+    <div id="particles-js"></div>
     <div class="content">
         <h1>Статус серверов Minecraft</h1>
         <div class="server-status">
@@ -122,6 +124,7 @@
             <div class="server-info">
                 <p id="status-play-mcrol-fun">Проверка...</p>
                 <p id="ip-play-mcrol-fun">IP сервера: play.mcrol.fun</p>
+                <p id="players-play-mcrol-fun">Игроки: --</p> <!-- New line for player count -->
                 <div id="motd-play-mcrol-fun" class="motd"></div>
             </div>
             <button id="copy-play-mcrol-fun" class="copy-button" onclick="copyToClipboard('copy-play-mcrol-fun')"><i class="fas fa-copy"></i></button>
@@ -133,18 +136,19 @@
             const servers = [
                 { name: 'play.mcrol.fun', ip: 'play.mcrol.fun', port: 25565 }
             ];
-        
+
             for (const server of servers) {
                 try {
                     const response = await fetch(`https://api.mcsrvstat.us/2/${server.ip}:${server.port}`);
                     const data = await response.json();
-        
+
                     const statusElement = document.getElementById(`status-${server.name.replace(/\./g, '-')}`);
                     const motdElement = document.getElementById(`motd-${server.name.replace(/\./g, '-')}`);
                     const logoElement = document.getElementById(`logo-${server.name.replace(/\./g, '-')}`);
                     const ipElement = document.getElementById(`ip-${server.name.replace(/\./g, '-')}`);
+                    const playersElement = document.getElementById(`players-${server.name.replace(/\./g, '-')}`);
                     const copyButton = document.getElementById(`copy-${server.name.replace(/\./g, '-')}`);
-        
+
                     if (data.online) {
                         statusElement.innerText = "Сервер в сети";
                         statusElement.classList.remove('status-offline');
@@ -160,20 +164,22 @@
                             motdElement.style.color = '#ddd';
                             motdElement.style.backgroundColor = '#333';
                         }
+                        playersElement.innerText = `Игроки: ${data.players.online}/${data.players.max}`;
                     } else {
                         statusElement.innerText = "Сервер недоступен";
                         statusElement.classList.remove('status-online');
                         statusElement.classList.add('status-offline');
                         motdElement.innerText = "";
+                        playersElement.innerText = "Игроки: --";
                     }
-        
+
                     ipElement.innerText = server.ip + ':' + server.port;
                 } catch (error) {
                     console.error('Ошибка при получении данных сервера', error);
                 }
             }
         }
-        
+
         function formatMotd(motdArray) {
             let formattedMotd = '';
             motdArray.forEach((line, index) => {
@@ -185,7 +191,7 @@
             });
             return formattedMotd;
         }
-        
+
         function copyToClipboard(buttonId) {
             const ipElement = document.getElementById(buttonId.replace('copy-', 'ip-'));
             const ipToCopy = ipElement.innerText.trim();
@@ -196,8 +202,12 @@
                 console.error("Ошибка при копировании: ", err);
             });
         }
-        
+
         setInterval(checkMinecraftServers, 2000);
     </script>
+
+    <script src="particles.min.js"></script>
+    <script src="app.js"></script>
+
 </body>
 </html>
