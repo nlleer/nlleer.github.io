@@ -107,22 +107,10 @@
         });
     </script>
 
-<audio id="myAudio" controls autoplay>
-  <source src="music.mp3" type="audio/mpeg">
-  Ваш браузер не поддерживает воспроизведение аудио.
-</audio>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var audio = document.getElementById('myAudio');
-    audio.play().then(function() {
-      console.log('Аудио воспроизводится автоматически.');
-    }).catch(function(error) {
-      console.log('Ошибка воспроизведения аудио: ' + error);
-    });
-  });
-</script>
-
+    <audio autoplay>
+      <source src="music.mp3" type="audio/mpeg">
+      Ваш браузер не поддерживает аудио или произошла ошибка сайта.
+    </audio>
     
     <script src="particles.min.js"></script>
     <script src="app.js"></script>
