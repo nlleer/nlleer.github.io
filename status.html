@@ -136,7 +136,7 @@
             <div class="server-info">
                 <p id="status-play-mcrol-fun">Проверка...</p>
                 <p id="ip-play-mcrol-fun">IP сервера: play.mcrol.fun</p>
-                <p id="players-play-mcrol-fun">Игроки: --</p>
+                <p id="players-play-mcrol-fun">Игроки: ${data.players.online}/${data.players.max}</p>
                 <div id="motd-play-mcrol-fun" class="motd"></div>
             </div>
             <button id="copy-play-mcrol-fun" class="copy-button" onclick="copyToClipboard('copy-play-mcrol-fun')"><i class="fas fa-copy"></i></button>
@@ -176,12 +176,12 @@
                             motdElement.style.color = '#ddd';
                             motdElement.style.backgroundColor = '#333';
                         }
+
                     } else {
                         statusElement.innerText = "Сервер недоступен";
                         statusElement.classList.remove('status-online');
                         statusElement.classList.add('status-offline');
                         motdElement.innerText = "";
-                        playersElement.innerText = "Игроки: ${data.players.online}/${data.players.max}";
                     }
 
                     ipElement.innerText = server.ip + ':' + server.port;
