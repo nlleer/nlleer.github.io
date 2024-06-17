@@ -136,7 +136,7 @@
             <div class="server-info">
                 <p id="status-play-mcrol-fun">Проверка...</p>
                 <p id="ip-play-mcrol-fun">IP сервера: play.mcrol.fun</p>
-                <p id="players-play-mcrol-fun">Игроки: Скоро будет блять</p>
+                <p id="players-play-mcrol-fun">Игроков: проверка...</p>
                 <div id="motd-play-mcrol-fun" class="motd"></div>
             </div>
             <button id="copy-play-mcrol-fun" class="copy-button" onclick="copyToClipboard('copy-play-mcrol-fun')"><i class="fas fa-copy"></i></button>
@@ -155,14 +155,15 @@
                     const data = await response.json();
 
                     const statusElement = document.getElementById(`status-${server.name.replace(/\./g, '-')}`);
+                    const playersElement = document.getElementById(`players-${server.name.replace(/\./g, '-')}`);
                     const motdElement = document.getElementById(`motd-${server.name.replace(/\./g, '-')}`);
                     const logoElement = document.getElementById(`logo-${server.name.replace(/\./g, '-')}`);
                     const ipElement = document.getElementById(`ip-${server.name.replace(/\./g, '-')}`);
-                    const playersElement = document.getElementById(`players-${server.name.replace(/\./g, '-')}`);
                     const copyButton = document.getElementById(`copy-${server.name.replace(/\./g, '-')}`);
 
                     if (data.online) {
                         statusElement.innerText = "Сервер в сети";
+                        playersElement.innerText = `Игроков: ${data.players.online}/${data.players.max}`;
                         statusElement.classList.remove('status-offline');
                         statusElement.classList.add('status-online');
                         if (data.icon) {
@@ -176,14 +177,9 @@
                             motdElement.style.color = '#ddd';
                             motdElement.style.backgroundColor = '#333';
                         }
-                        if (data.players) {
-                             playersElement.innerText = `Игроки: ${data.players.online}/${data.players.max}`;
-                        } else {
-                            playersElement.innerText = 'Игроки: Недоступно';
-                        }
-
                     } else {
                         statusElement.innerText = "Сервер недоступен";
+                        playersElement.innerText = "";
                         statusElement.classList.remove('status-online');
                         statusElement.classList.add('status-offline');
                         motdElement.innerText = "";
