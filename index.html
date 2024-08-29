@@ -83,8 +83,6 @@
             margin-bottom: 10px;
             white-space: pre;
             overflow: hidden;
-            border-right: 2px solid white;
-            animation: blink 0.7s steps(2, start) infinite;
         }
 
         @keyframes fadeInMove {
@@ -94,24 +92,11 @@
             }
         }
 
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-        }
-
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
-            animation: fadeInMove 1s forwards, fadeOut 1s forwards;
-            animation-delay: 1s;
+            animation: fadeInMove 1s forwards;
             display: inline-block;
-        }
-
-        @keyframes blink {
-            from { border-color: transparent; }
-            to { border-color: white; }
         }
     </style>
 </head>
@@ -150,13 +135,7 @@
             index++;
 
             if (index < text.length) {
-                setTimeout(showNextLetter, 1000);
-            } else {
-                setTimeout(() => {
-                    textContainer.innerHTML = '';
-                    index = 0;
-                    showNextLetter();
-                }, 2000);
+                setTimeout(showNextLetter, 500); 
             }
         }
 
