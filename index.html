@@ -78,11 +78,38 @@
             font-size: 18px;
         }
 
+        #animated-title {
+            font-size: 32px;
+            margin-bottom: 10px;
+            white-space: pre;
+            overflow: hidden;
+            border-right: 2px solid white;
+            animation: blink 0.7s steps(2, start) infinite;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInMove 1s forwards;
+        }
+
+        @keyframes fadeInMove {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes blink {
+            from { border-color: transparent; }
+            to { border-color: white; }
+        }
     </style>
 </head>
 <body>
     <div id="particles-js"></div>
     <div class="content">
+        <div id="animated-title"></div>
         <img src="nlleer.jpg" alt="nlleer" class="round">
         <h1>nlleer</h1>
         <p>Exploits cannot be fixed</p>
@@ -102,11 +129,29 @@
                 alert('Не удалось скопировать email: ' + error);
             });
         });
+
+        const text = "nlleer - Official site";
+        const textContainer = document.getElementById('animated-title');
+        let index = 0;
+
+        function showNextLetter() {
+            const span = document.createElement('span');
+            span.className = 'fade-in';
+            span.textContent = text[index];
+            textContainer.appendChild(span);
+            index++;
+
+            if (index < text.length) {
+                setTimeout(showNextLetter, 1000);
+            }
+        }
+
+        showNextLetter();
     </script>
 
     <audio autoplay>
-      <source src="music.mp3" type="audio/mpeg">
-      Ваш браузер не поддерживает аудио или произошла ошибка сайта.
+        <source src="music.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио или произошла ошибка сайта.
     </audio>
     
     <script src="particles.min.js"></script>
