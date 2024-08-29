@@ -87,17 +87,26 @@
             animation: blink 0.7s steps(2, start) infinite;
         }
 
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInMove 1s forwards;
-        }
-
         @keyframes fadeInMove {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInMove 1s forwards, fadeOut 1s forwards;
+            animation-delay: 1s;
+            display: inline-block;
         }
 
         @keyframes blink {
@@ -142,6 +151,12 @@
 
             if (index < text.length) {
                 setTimeout(showNextLetter, 1000);
+            } else {
+                setTimeout(() => {
+                    textContainer.innerHTML = '';
+                    index = 0;
+                    showNextLetter();
+                }, 2000);
             }
         }
 
