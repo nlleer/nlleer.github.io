@@ -85,18 +85,22 @@
             overflow: hidden;
         }
 
-        @keyframes fadeInMove {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInMove 1s forwards;
             display: inline-block;
+            color: white;
+            background: none;
+            -webkit-background-clip: none;
+            -webkit-text-fill-color: white;
+        }
+
+        @keyframes fadeInMove {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -135,7 +139,7 @@
             index++;
 
             if (index < text.length) {
-                setTimeout(showNextLetter, 800);
+                setTimeout(showNextLetter, 1);
             }
         }
 
