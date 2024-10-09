@@ -33,6 +33,11 @@
         .content {
             text-align: center;
             z-index: 1;
+            background-color: rgba(0, 0, 0, 0.7); /* Прозрачный чёрный фон */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Тень для фона */
+            position: relative; /* Для позиционирования просмотров */
         }
 
         .round {
@@ -83,9 +88,6 @@
             animation: fadeInMove 1s forwards;
             display: inline-block;
             color: white;
-            background: none;
-            -webkit-background-clip: none;
-            -webkit-text-fill-color: white;
         }
 
         @keyframes fadeInMove {
@@ -94,6 +96,42 @@
                 transform: translateY(0);
             }
         }
+
+        /* Стили для блока с иконками */
+        .icons {
+            margin-top: 10px;
+        }
+
+        .icons a {
+            margin: 0 10px;
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+        }
+
+        /* Стили для блока с просмотрами */
+        .views {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .views img {
+            width: 20px;
+            margin-right: 8px; 
+        }
+
+        .views span {
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
@@ -101,10 +139,33 @@
         <img src="nlleer.jpg" alt="nlleer" class="round">
         <div id="animated-title"></div>
         <p>Exploits cannot be fixed</p>
-        <a href="https://discord.gg/87jCmcPSjS" target="_blank" style="color: #ffffff; font-size: 24px;"><i class="fab fa-discord"></i></a>
-        <a href="https://t.me/nlleer" target="_blank" style="color: #ffffff; font-size: 24px;"><i class="fab fa-telegram"></i></a>
-        <a href="#" id="mail-link" target="_blank" style="color: #ffffff; font-size: 24px;"><i class="fab fa-google"></i></a>
+        
+        <div class="icons">
+            <a href="https://discord.gg/87jCmcPSjS" target="_blank"><i class="fab fa-discord"></i></a>
+            <a href="https://t.me/nlleer" target="_blank"><i class="fab fa-telegram"></i></a>
+            <a href="#" id="mail-link" target="_blank"><i class="fab fa-google"></i></a>
+        </div>
+
+        <div class="views">
+            <img src="eye.jpg" alt="Views">
+            <span id="view-count">0</span>
+        </div>
     </div>
+
+    <script>
+        function updateViewCount() {
+            let count = localStorage.getItem('viewCount');
+            if (!count) {
+                count = 0;
+            }
+
+            count++;
+            localStorage.setItem('viewCount', count);
+            document.getElementById('view-count').textContent = count;
+        }
+
+        window.onload = updateViewCount;
+    </script>
     
     <script>
         document.getElementById('mail-link').addEventListener('click', function(event) {
