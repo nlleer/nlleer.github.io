@@ -149,19 +149,24 @@
 
     <script>
         function updateViewCount() {
+            let hasVisited = localStorage.getItem('hasVisited');
             let count = localStorage.getItem('viewCount');
             if (!count) {
                 count = 0;
             }
-
-            count++;
-            localStorage.setItem('viewCount', count);
+    
+            if (!hasVisited) {
+                count++;
+                localStorage.setItem('viewCount', count);
+                localStorage.setItem('hasVisited', 'true');
+            }
+    
             document.getElementById('view-count').textContent = count;
         }
-
+    
         window.onload = updateViewCount;
     </script>
-    
+
     <script>
         document.getElementById('mail-link').addEventListener('click', function(event) {
             event.preventDefault();
