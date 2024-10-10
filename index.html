@@ -149,21 +149,16 @@
 
     <script>
         function updateViewCount() {
-            let hasVisited = localStorage.getItem('hasVisited');
             let count = localStorage.getItem('viewCount');
             if (!count) {
                 count = 0;
             }
-    
-            if (!hasVisited) {
-                count++;
-                localStorage.setItem('viewCount', count);
-                localStorage.setItem('hasVisited', 'true');
-            }
-    
+
+            count++;
+            localStorage.setItem('viewCount', count);
             document.getElementById('view-count').textContent = count;
         }
-    
+
         window.onload = updateViewCount;
     </script>
 
